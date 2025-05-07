@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "550e8400-e29b-41d4-a716-446655440000",
+		"name": "Professional Loan Management System",
+		"description": "API collection for PLMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. User Management",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8732/api/users/register",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "users", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8732/api/users/login",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "users", "login"]
+						}
+					}
+				},
+				{
+					"name": "Forgot Password (Send OTP)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8732/api/users/forgot-password?email=john@example.com",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "users", "forgot-password"],
+							"query": [
+								{ "key": "email", "value": "john@example.com" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8732/api/users/verify-otp?email=john@example.com&otp=123456",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "users", "verify-otp"],
+							"query": [
+								{ "key": "email", "value": "john@example.com" },
+								{ "key": "otp", "value": "123456" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8732/api/users/reset-password?email=john@example.com&otp=123456&newPassword=newpassword123",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "users", "reset-password"],
+							"query": [
+								{ "key": "email", "value": "john@example.com" },
+								{ "key": "otp", "value": "123456" },
+								{ "key": "newPassword", "value": "newpassword123" }
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Loan Application",
+			"item": [
+				{
+					"name": "Submit Loan Application",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "profession",
+									"value": "Software Engineer",
+									"type": "text"
+								},
+								{
+									"key": "purpose",
+									"value": "Home Renovation",
+									"type": "text"
+								},
+								{
+									"key": "loanAmount",
+									"value": "500000",
+									"type": "text"
+								},
+								{
+									"key": "creditScore",
+									"value": "750",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "pfAccountPdf",
+									"type": "file",
+									"src": "/path/to/pf.pdf"
+								},
+								{
+									"key": "salarySlip",
+									"type": "file",
+									"src": "/path/to/salary.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8732/api/loans/apply",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "loans", "apply"]
+						}
+					}
+				},
+				{
+					"name": "Get All Applications (Admin)",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8732/api/loans/all",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "loans", "all"]
+						}
+					}
+				},
+				{
+					"name": "Get User Applications",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8732/api/loans/user/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "loans", "user", "1"]
+						}
+					}
+				},
+				{
+					"name": "Update Loan Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"APPROVED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8732/api/loans/update-status/550e8400-e29b-41d4-a716-446655440000",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "loans", "update-status", "550e8400-e29b-41d4-a716-446655440000"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Disbursement",
+			"item": [
+				{
+					"name": "Disburse Loan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 500000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8732/api/disbursements/disburse/550e8400-e29b-41d4-a716-446655440000",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "disbursements", "disburse", "550e8400-e29b-41d4-a716-446655440000"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Repayment",
+			"item": [
+				{
+					"name": "Calculate EMI",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8732/api/repayments/calculate-emi?principal=500000&tenure=12&interestRate=12.0",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "repayments", "calculate-emi"],
+							"query": [
+								{
+									"key": "principal",
+									"value": "500000"
+								},
+								{
+									"key": "tenure",
+									"value": "12"
+								},
+								{
+									"key": "interestRate",
+									"value": "12.0"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Generate EMI Schedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tenure\": 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8732/api/repayments/generate-schedule/550e8400-e29b-41d4-a716-446655440000",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "repayments", "generate-schedule", "550e8400-e29b-41d4-a716-446655440000"]
+						}
+					}
+				},
+				{
+					"name": "Make EMI Payment",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "http://localhost:8732/api/repayments/pay/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "repayments", "pay", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get Loan EMIs",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8732/api/repayments/loan/550e8400-e29b-41d4-a716-446655440000",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "repayments", "loan", "550e8400-e29b-41d4-a716-446655440000"]
+						}
+					}
+				},
+				{
+					"name": "Get Pending EMIs",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8732/api/repayments/pending/550e8400-e29b-41d4-a716-446655440000",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "repayments", "pending", "550e8400-e29b-41d4-a716-446655440000"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "5. Notifications",
+			"item": [
+				{
+					"name": "Get User Notifications",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8732/api/notifications/user/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "notifications", "user", "1"]
+						}
+					}
+				},
+				{
+					"name": "Mark Notification as Read",
+					"request": {
+						"method": "PUT",
+						"url": {
+							"raw": "http://localhost:8732/api/notifications/1/read",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8732",
+							"path": ["api", "notifications", "1", "read"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
